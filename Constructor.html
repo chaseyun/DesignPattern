@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <title>Constructor-构造器模式</title>
+</head>
+<body>
+    <script>
+        //ES6 class 基于原型链模式
+        class Car{
+            constructor(model,year,miles){
+                this.model = model;
+                this.year = year;
+                this.miles = miles;
+            }
+            toString(){
+                return this.model + " has done " + this.miles + " miles";
+            }
+        }
+
+        let audiA4 = new Car("audiA4",2019,2000);
+        console.log(audiA4.toString());
+    </script>
+</body>
+</html>
