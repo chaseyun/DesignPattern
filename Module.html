@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <title>Module-模块模式</title>
+</head>
+<body>
+    <script>
+        let myModule = {
+            myProperty:"someValue",
+            myConfig:{
+                useCaching:true,
+                language:"zh-cn"
+            },
+            myMethod:function(){
+                console.log("Your are a really mother fucker!");
+            },
+            myMethod1:function(){
+                console.log("Caching is:" + (this.myConfig.useCaching)?"enabled":"disabled");
+            },
+            myMethod2:function(newConfig){
+                if(typeof newConfig === "object"){
+                    this.myConfig = newConfig;
+                    console.log(this.myConfig.language);
+                }
+            }
+        }
+
+        myModule.myMethod();
+        myModule.myMethod1();
+        myModule.myMethod2({
+            language:"安拉胡阿克巴！",
+            useCaching:false
+        })
+
+        //模块模式 类似于闭包 分为 私有方法 公有方法 私有方法自身调用 公有方法 为外部提供数据
+        let testModule = (function(){
+            let counter = 0;
+
+            return {
+                incrementCounter:function(){
+                    return counter++;
+                },
+                resetCounter:function(){
+                    console.log("counter value prior to reset:" + counter);
+                }
+            };
+        })();
+
+        let myNamespace = (function(){
+            //定义私有计数器变量
+            let myPrivateVar = 0;
+            //记录所有参数的私有函数
+            function myPrivateMethod(foo){
+                console.log(foo);
+            }
+
+            return {
+                //共有变量
+                myPublicVar:"foo",
+                //调用私有变量和方法的公有函数
+                myPublicFunction:function(bar){
+                    //增加私有计数器值
+                    myPrivateVar++;
+
+                    //传入bar调用私有方法
+                    myPrivateMethod(bar);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
